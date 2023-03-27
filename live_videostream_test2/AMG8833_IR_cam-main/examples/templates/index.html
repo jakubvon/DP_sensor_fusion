@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="../static/style.css/">
+       <title>Streaming data</title>
+    </head>
+
+    <body>
+
+    <h1>Streaming example</h1>
+    <img src="{{ url_for('video') }}"/>
+
+    <div id="number_of_people"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        setInterval(function() {  
+          $.ajax({
+            url: '/number_of_people',
+            success: function(data) {
+              $('#number_of_people').text('Number of people: ' + data);
+            }
+          });
+        }, 1000); // Update the variable every 1 second
+      });
+    </script>
+
+    <div id="motion_found"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        setInterval(function() {
+          $.ajax({
+            url: '/motion_found',
+            success: function(data) {
+              $('#motion_found').text('Motion found: ' + data);
+            }
+          });
+        }, 1000); // Update the variable every 1 second
+      });
+    </script>
+
+    </body>
+
+</html>
+
